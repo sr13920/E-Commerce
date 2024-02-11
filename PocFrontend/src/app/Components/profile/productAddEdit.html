@@ -1,0 +1,69 @@
+<h1 mat-dialog-title>{{productData.pid?'Update':'Add'}} Product</h1>
+<div mat-dialog-content>
+  <form>
+    <fieldset>
+      <div class="form-group">
+        <label for="productname"
+          ><span class="req">* </span> Product Name
+        </label>
+        <input
+          required
+          type="text"
+          [(ngModel)]="productData.productname"
+          name="productname"
+          id="productname"
+          class="form-control phone"
+          maxlength="28"
+          placeholder="Enter Product Name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="price"><span class="req">* </span> Price </label>
+        <input
+          required
+          type="text"
+          [(ngModel)]="productData.price"
+          name="price"
+          id="price"
+          class="form-control phone"
+          maxlength="28"
+          placeholder="Price"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="category"><span class="req">* </span> Category : </label>
+        <select
+          class="form-control"
+          placeholder="Category"
+          id="category"
+          required
+          [(ngModel)]="productData.category"
+          name="category"
+        >
+          <option *ngFor="let c of category" [value]="c.id">{{c.name}}</option>
+        </select>
+        <div id="errLast"></div>
+      </div>
+
+      <div align="end">
+        <input
+          class="btn btn-success"
+          type="submit"
+          name="save"
+          [value]="productData.pid?'Update':'Add'"
+          (click)="addEdit()"
+        />
+        <input
+          class="btn btn-success"
+          name="close"
+          value="Cancel"
+          mat-dialog-close
+        />
+      </div>
+    </fieldset>
+  </form>
+</div>

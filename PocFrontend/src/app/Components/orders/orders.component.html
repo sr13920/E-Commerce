@@ -1,0 +1,61 @@
+<mat-toolbar>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    style="margin-right: 10px"
+    (click)="goBackToHome()"
+  >
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+</mat-toolbar>
+
+<div class="row" style="margin-top: 20px">
+  <mat-expansion-panel
+    *ngFor="let data of dataSource"
+    class="example-card"
+    style="margin-right: 20px; background-color: lightgrey"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ data.oid }}({{ getTotalAmount(data) }})
+      </mat-panel-title>
+      <button *ngIf="data.oid == 'new-id'" (click)="placeOrder()">
+        Place Order
+      </button>
+    </mat-expansion-panel-header>
+    <button
+      color="primary"
+      (click)="editOrder(data)"
+      *ngIf="orderToUpdate != data.oid"
+    >
+      <mat-icon aria-hidden="true" fontIcon="edit"></mat-icon>
+    </button>
+    <button color="primary" (click)="deleteOrder(data.oid)">
+      <mat-icon aria-hidden="true" fontIcon="delete"></mat-icon>
+    </button>
+    <mat-list *ngIf="orderToUpdate != data.oid" role="list">
+      <mat-list-item role="listitem" *ngFor="let product of data.products"
+        ><span matListItemTitle>{{ product.productname }}</span>
+        <span matListItemLine>{{ product.price }}</span></mat-list-item
+      >
+    </mat-list>
+    <div *ngIf="orderToUpdate == data.oid">
+      <mat-selection-list #list [(ngModel)]="selectedProducts">
+        <mat-list-option
+          *ngFor="let product of productData"
+          (click)="onAreaListControlChanged(list)"
+          [value]="product.pid"
+        >
+          <span matListItemTitle>{{ product.productname }}</span>
+          <span matListItemLine>{{ product.price }}</span>
+        </mat-list-option>
+      </mat-selection-list>
+      <button (click)="updateOrder()" [disabled]="selectedProducts.length == 0">
+        update
+      </button>
+      <button (click)="cancelUpdate()">cancel</button>
+    </div>
+  </mat-expansion-panel>
+</div>

@@ -1,0 +1,23 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://tse4.mm.bing.net/th?id=OIP.fzSnClvueUiDCZNJINMWywHaEK&pid=Api&P=0');
+    background-size: cover;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
+
+.swiperSlide{
+  display:block;
+  width:100%;
+  height: 100%;
+  object-fit: cover;
+}

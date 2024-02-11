@@ -1,0 +1,62 @@
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<mat-toolbar>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <span class="example-spacer"></span>
+ 
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+    style="margin-right: 10px"
+    (click)="viewCart()"
+  >
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+    (click)="viewProfile()"
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="row">
+  <mat-card
+    *ngFor="let data of dataSource"
+    class="example-card"
+    style="margin-left: 20px; margin-top: 15px"
+    [ngStyle]="
+      data.category == 'FASHION'
+        ? { 'background-color': 'LightPink' }
+        : data.category == 'BOOKS'
+        ? { 'background-color': 'SkyBlue' }
+        : { 'background-color': 'LightGreen' }
+    "
+  >
+
+    <mat-card-header>
+      <mat-card-title>{{ data.productname }}</mat-card-title>
+      <mat-card-subtitle>{{ data.category }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ data.price }} Rs</p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button (click)="addToCart(data)">Add to Cart</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

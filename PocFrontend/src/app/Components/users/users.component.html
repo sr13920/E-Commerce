@@ -1,0 +1,93 @@
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<mat-toolbar>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    style="margin-right: 10px"
+    (click)="goBackToProfile()"
+  >
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+</mat-toolbar>
+<div class="row">
+  <mat-card
+    *ngFor="let data of dataSource"
+    class="example-card"
+    style="margin-left: 20px; margin-top: 15px; background: rgb(247, 94, 119)"
+  >
+    <mat-card-header>
+      <mat-card-title>{{ data.username }}</mat-card-title>
+      <mat-card-subtitle>
+        <mat-expansion-panel
+          class="example-card"
+          style="margin-right: 20px"
+          #panel
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> ID : {{ data.roles }} </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="editUserRole(data)"
+            [disabled]="checkRole"
+            *ngIf="userToChangeRole != data.username"
+          >
+            <mat-icon style="font-size: medium">edit</mat-icon>
+          </button>
+          <mat-list *ngIf="userToChangeRole != data.username" role="list">
+            <mat-list-item role="listitem" *ngFor="let r of roles">
+              <span matListItemLine>{{ r }}</span>
+            </mat-list-item>
+          </mat-list>
+          <div>
+            <mat-selection-list
+              *ngIf="userToChangeRole == data.username"
+              #list
+              [(ngModel)]="selectedRoles"
+            >
+              <mat-list-option
+                *ngFor="let r of roles"
+                (click)="onAreaListControlChanged(list)"
+                [value]="r"
+              >
+                <span matListItemTitle>{{ r }}</span>
+              </mat-list-option>
+            </mat-selection-list>
+            <button
+              (click)="updateRoles(panel)"
+              [disabled]="selectedRoles.length == 0"
+            >
+              update
+            </button>
+            <button (click)="cancelUpdateRoles(panel)">cancel</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <span>First Name : {{ data.firstname }}</span
+      ><br />
+      <span>Last Name : {{ data.lastname }}</span
+      ><br />
+      <span>Email : {{ data.email }}</span>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button
+        color="primary"
+        (click)="deleteUser(data.username)"
+        [disabled]="checkRole"
+      >
+        <mat-icon fontIcon="delete"></mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

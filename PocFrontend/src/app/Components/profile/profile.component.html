@@ -1,0 +1,71 @@
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+    style="margin-right: 10px" (click)="goBackToHome()">
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+  <span>My Profile</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+    style="margin-right: 10px" (click)="addProduct()" title="Add a new product">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="logout()"
+    title="Logout">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+<div align="center">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ user.firstname + " " + user.lastname }}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <span>Username:{{ user.username }} <br />Email:{{ user.email }}<br />Role:{{
+        user.roles
+        }}</span>
+    </mat-card-content>
+    <mat-card-actions style="justify-content: center">
+      <button mat-button (click)="editUser()">Update</button>
+      <button mat-button style="margin-left: 5px" (click)="showUsers()">
+        show all users
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div style="border: 2px solid black; margin-top: 50px">
+  <swiper [slidesPerView]="4" [spaceBetween]="25" [navigation]="true" (swiper)="onSwiper($event)"
+    (slideChange)="onSlideChange()">
+    <ng-container *ngFor="let data of dataSource">
+      <ng-template swiperSlide>
+        <mat-card class="example-card" style="margin-top: 15px; margin-bottom: 15px" [ngStyle]="
+            data.category == 'FASHION'
+              ? { 'background-color': 'LightPink' }
+              : data.category == 'BOOKS'
+              ? { 'background-color': 'SkyBlue' }
+              : { 'background-color': 'LightGreen' }
+          ">
+          <mat-card-actions align="end">
+            <button color="primary" (click)="deleteProduct(data)">
+              <mat-icon aria-hidden="false" fontIcon="delete"></mat-icon>
+            </button>
+            <button color="primary" (click)="editProduct(data)">
+              <mat-icon aria-hidden="true" fontIcon="edit"></mat-icon>
+            </button>
+          </mat-card-actions>
+          <mat-card-header>
+            <mat-card-title>{{ data.productname }}</mat-card-title>
+            <mat-card-subtitle>{{ data.category }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ data.price }} Rs</p>
+          </mat-card-content>
+        </mat-card>
+      </ng-template>
+    </ng-container>
+  </swiper>
+</div>

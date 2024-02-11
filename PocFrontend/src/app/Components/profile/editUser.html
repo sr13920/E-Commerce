@@ -1,0 +1,67 @@
+<h1 mat-dialog-title>Update User</h1>
+<div mat-dialog-content>
+  <form>
+    <fieldset>
+      <div class="form-group">
+        <label for="firstname"><span class="req">* </span> First Name </label>
+        <input
+          required
+          type="text"
+          [(ngModel)]="userData.firstname"
+          name="firstname"
+          id="firstname"
+          class="form-control phone"
+          maxlength="28"
+          placeholder="Enter First Name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="lastname"><span class="req">* </span> Last Name </label>
+        <input
+          required
+          type="text"
+          [(ngModel)]="userData.lastname"
+          name="lastname"
+          id="lastname"
+          class="form-control phone"
+          maxlength="28"
+          placeholder="Enter Last Name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email"><span class="req">* </span> Email </label>
+        <input
+          required
+          type="text"
+          [(ngModel)]="userData.email"
+          name="email"
+          id="email"
+          class="form-control phone"
+          maxlength="28"
+          placeholder="Enter Email"
+          required
+        />
+      </div>
+
+      <div align="end">
+        <input
+          class="btn btn-success"
+          type="submit"
+          name="save"
+          value="Update"
+          (click)="addEdit()"
+        />
+        <input
+          class="btn btn-success"
+          name="close"
+          value="Cancel"
+          mat-dialog-close
+        />
+      </div>
+    </fieldset>
+  </form>
+</div>
